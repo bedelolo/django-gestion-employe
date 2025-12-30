@@ -1,0 +1,66 @@
+{% extends "employe/base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-3xl font-bold text-gray-800">Liste des Employés</h2>
+        <a href="{% url 'ajouter_employe' %}" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Ajouter un employé
+        </a>
+    </div>
+
+    <div class="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
+        <table class="table w-full bg-white">
+            <!-- head -->
+            <thead class="bg-gray-50 text-gray-600 uppercase text-sm leading-normal">
+                <tr>
+                    <th>Nom Complet</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Poste</th>
+                    <th>Salaire</th>
+                    <th>Date d'embauche</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+                {% for emp in employes %}
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="font-medium">
+                        <div class="flex items-center space-x-3">
+                            <div>
+                                <div class="font-bold">{{ emp.Nom }}</div>
+                                <div class="text-sm opacity-50">{{ emp.Prenom }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ emp.Email }}</td>
+                    <td>{{ emp.Telephone|default:"-" }}</td>
+                    <td><span class="badge badge-ghost badge-sm">{{ emp.Poste }}</span></td>
+                    <td class="font-bold text-primary">{{ emp.Salaire }} €</td>
+                    <td>{{ emp.Date_Embauche|default:"-" }}</td>
+                    <td class="text-center">
+                        <div class="join">
+                            <a href="{% url 'modifier_employe' emp.id %}"
+                                class="btn btn-sm btn-info join-item text-white">Modifier</a>
+                            <a href="{% url 'supprimer_employe' emp.id %}"
+                                class="btn btn-sm btn-error join-item text-white">Supprimer</a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center py-6 text-gray-500">
+                        Aucun employé enregistré pour le moment.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

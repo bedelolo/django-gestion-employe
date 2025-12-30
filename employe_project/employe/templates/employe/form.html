@@ -1,0 +1,72 @@
+{% extends "employe/base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="card bg-base-100 shadow-xl border border-gray-200">
+        <div class="card-body">
+            <h2 class="card-title text-2xl mb-6 border-b pb-2">{{ titre }}</h2>
+
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Nom</span>
+                        </label>
+                        {{ form.Nom }}
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Prénom</span>
+                        </label>
+                        {{ form.Prenom }}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Email</span>
+                        </label>
+                        {{ form.Email }}
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Téléphone</span>
+                        </label>
+                        {{ form.Telephone }}
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Poste</span>
+                    </label>
+                    {{ form.Poste }}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Salaire</span>
+                        </label>
+                        {{ form.Salaire }}
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Date d'embauche</span>
+                        </label>
+                        {{ form.Date_Embauche }}
+                    </div>
+                </div>
+
+                <div class="card-actions justify-end mt-8">
+                    <a href="{% url 'listes_employes' %}" class="btn btn-ghost">Annuler</a>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
